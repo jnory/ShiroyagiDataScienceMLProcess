@@ -1,0 +1,7 @@
+tex/*
+.ipynb_checkpoints
+.DS_Store
+*.ipynb
+!process.ipynb
+.idea
+__pycache__

@@ -5,6 +5,7 @@ import pandas as pd
 from scipy.sparse import lil_matrix
 from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import PolynomialFeatures
 
 
 def add_columns(df):
@@ -143,10 +144,11 @@ def convert_to_poly(train_vec, dev_vec, test_vec, degree):
     :param degree: 多項式の次数
     :return: 変換した多項式版特徴量ベクトル
     """
-    # TODO: 演習1: ここにsklearn.preprocess.PolynomialFeaturesを使ってfeatureを変換するコードを書いてください。
-    # TODO: include_biasオプションはFalseにする必要があることに注意してください。
-    # 以下のコードはdegree == 1のときのみ有効
-    assert degree == 1
+    # 演習1: 解答例
+    pf = PolynomialFeatures(include_bias=False, degree=degree)
+    train_vec = pf.fit_transform(train_vec)
+    dev_vec = pf.transform(dev_vec)
+    test_vec = pf.transform(test_vec)
     return train_vec, dev_vec, test_vec
 
 

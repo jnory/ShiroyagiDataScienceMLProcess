@@ -1,4 +1,6 @@
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
 
 
 def train(features, price, kind="linear"):
@@ -10,10 +12,16 @@ def train(features, price, kind="linear"):
     :param kind: "linear", "lasso", "ridge"のいずれか
     :return: 学習したモデル, 学習データに対する予測値
     """
-    # TODO: 演習2 kind == "lasso"のときLasso回帰、 kind == "ridge"のときRidge回帰を実行するように修正してください。
-    # TODO: sklearn.linear_model.Lasso, sklearn.linear_model.Ridgeを使います。
-    assert kind == "linear"
-    model = LinearRegression(fit_intercept=False)
+    # 演習2: 解答例
+    if kind == "linear":
+        model = LinearRegression(fit_intercept=False)
+    elif kind == "lasso":
+        model = Lasso(fit_intercept=False)
+    elif kind == "ridge":
+        model = Ridge(fit_intercept=False)
+    else:
+        raise ValueError
+
     model.fit(features, price)
     train_est = model.predict(features)
     return model, train_est

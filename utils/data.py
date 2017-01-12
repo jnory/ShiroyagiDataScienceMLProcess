@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os.path
 import numpy as np
 import pandas as pd
 from scipy.sparse import lil_matrix
@@ -22,13 +23,15 @@ def add_columns(df):
 def load(path):
     """
     pathに指定されたCSVファイルを読み込みます。
-    pathはautos.csvへのパスであることが期待されています。
+    pathはautos.csv/train.csv/dev.csv/test.csvへのパスであることが期待されています。
 
-    :param path: autos.csvへのパス
+    :param path: CSVへのパス
     :return: pandas.DataFrame
     """
+    assert os.path.basename(path) in ("autos.csv", "train.csv", "dev.csv", "test.csv")
     df = pd.read_csv(path, encoding="latin-1")
-    add_columns(df)
+    if os.path.basename(path) == "autos.csv":
+        add_columns(df)
     return df
 
 
